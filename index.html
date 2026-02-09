@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Sudarshana ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffb6c1">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: radial-gradient(circle, #ffc0cb, #ffe4e1);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.page {
+  display: none;
+  text-align: center;
+  padding: 20px;
+}
+
+.active {
+  display: block;
+  animation: fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+h1 {
+  font-size: 2.1rem;
+  margin-bottom: 15px;
+  color: #c71585; /* dark fuchsia */
+  text-shadow: 0 0 10px #ff69b4;
+}
+
+p {
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+  color: #800020; /* deep rose */
+  line-height: 1.6;
+}
+
+button {
+  padding: 12px 30px;
+  font-size: 1rem;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.yes {
+  background: #ff69b4;
+  color: #fff;
+  box-shadow: 0 0 15px #ff69b4;
+}
+
+.yes:hover {
+  transform: scale(1.15);
+}
+
+.no {
+  background: #fff0f5;
+  color: #c71585;
+  border: 1px solid #c71585;
+  position: absolute;
+}
+
+/* Photo */
+.photo {
+  width: 90%;
+  max-width: 300px;
+  border-radius: 18px;
+  border: 2px solid #ff69b4;
+  box-shadow: 0 0 20px rgba(255,105,180,0.7);
+  margin-bottom: 20px;
+}
+
+/* Hearts */
+.heart {
+  position: absolute;
+  font-size: 22px;
+  color: #ff1493; /* rich pink hearts */
+  text-shadow: 0 0 5px #ff69b4;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-700px); opacity: 0; }
+}
+
+/* Typing cursor */
+.cursor {
+  color: #c71585; /* dark fuchsia cursor */
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,50%,100% { opacity: 1; }
+  25%,75% { opacity: 0; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.7rem; }
+  p { font-size: 0.95rem; }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" src="music.mp3" loop></audio>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <h1 id="typing"></h1>
+  <p>Every heartbeat of mine belongs to you.</p>
+  <h1>Will you be my Valentine, Sudarshana? 🖤❤️</h1>
+  <br>
+  <button class="yes" onclick="goTo('page1','page2')">Yes 🖤</button>
+  <button class="no" id="noBtn">No 😌</button>
+</div>
+
+<!-- PHOTO PAGE 1 -->
+<div class="page" id="page2">
+  <img src="photo1.jpeg" class="photo">
+  <p>
+    Sudarshana, this moment reminds me how effortlessly you make my life
+    brighter. Every smile of yours feels like home, and every second
+    with you is a memory I want to keep forever.
+  </p>
+  <button class="yes" onclick="goTo('page2','page3')">Next ❤️</button>
+</div>
+
+<!-- PHOTO PAGE 2 -->
+<div class="page" id="page3">
+  <img src="photo2.jpeg" class="photo">
+  <p>
+    Loving you feels natural, like breathing. With you, even the quiet
+    moments feel magical. You understand me in ways no one else ever has,
+    and that’s something I cherish deeply.
+  </p>
+  <button class="yes" onclick="goTo('page3','page4')">Next ❤️</button>
+</div>
+
+<!-- PHOTO PAGE 3 -->
+<div class="page" id="page4">
+  <img src="photo3.jpeg" class="photo">
+  <p>
+    Sudarshana, you are my favorite person, my safe place, and my biggest
+    blessing. No matter where life takes us, I want every chapter to have
+    you in it — always.
+  </p>
+  <button class="yes" onclick="goToFinal()">Forever 🖤</button>
+</div>
+
+<!-- FINAL PAGE -->
+<div class="page" id="page5">
+  <h1>She Said YES 💍</h1>
+  <p>
+    I choose you today, tomorrow, and for all the days that follow.
+    Thank you for being mine. I love you endlessly, Sudarshana. 🖤❤️
+  </p>
+  <h1>I Love You Forever</h1>
+</div>
+
+<script>
+/* Typing effect */
+const text = "Hey Sudarshana 🖤";
+let index = 0;
+const typing = document.getElementById("typing");
+
+function typeEffect() {
+  if (index < text.length) {
+    typing.innerHTML += text.charAt(index);
+    index++;
+    setTimeout(typeEffect, 120);
+  } else {
+    typing.innerHTML += '<span class="cursor">|</span>';
+  }
+}
+typeEffect();
+
+/* No button movement */
+const noBtn = document.getElementById("noBtn");
+function moveNo() {
+  noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
+  noBtn.style.top = Math.random() * (window.innerHeight - 60) + "px";
+}
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
+
+/* Navigation */
+function goTo(from, to) {
+  document.getElementById("bgMusic").play();
+  document.getElementById(from).classList.remove("active");
+  document.getElementById(to).classList.add("active");
+}
+
+function goToFinal() {
+  goTo('page4','page5');
+  createHearts();
+}
+
+/* Hearts */
+function createHearts() {
+  for (let i = 0; i < 30; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.bottom = "-20px";
+    heart.style.animationDuration = 3 + Math.random() * 4 + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 7000);
+  }
+}
+</script>
+
+</body>
+</html>
